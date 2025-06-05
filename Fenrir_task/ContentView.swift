@@ -11,7 +11,7 @@ struct ContentView: View {
     //    入力されたものを受け取る変数
     @State private var inputText: String = ""
     //    判定結果の変数
-    @State private var result: Bool = false
+    @State private var result: Bool? = nil
     var body: some View {
         VStack {
             Text("括弧閉じてるか判定")
@@ -23,19 +23,22 @@ struct ContentView: View {
                 .padding(.horizontal)
             //            判定処理を促すボタン
             Button("判定する") {
-//                result = isValid(inputText)
+                //                判定するメソッドに飛ばす
+                result = isValid(inputText)
             }
             .padding()
             .background(Color.red)
             .foregroundStyle(Color.white)
             .cornerRadius(10)
             
-//            if let resultText = result {
-//                Text(resultText ? "正しい" : "正しくない")
-//                    .font(.headline)
-//                    
-//                
-//            }
+            //            正しいかどうかの表示
+            if let resultText = result {
+                Text(resultText ? "正しい" : "正しくない")
+                    .font(.headline)
+                ‭/*print("出して")*/
+//                なんでー
+                
+            }
             Spacer()
             
         }
@@ -45,12 +48,32 @@ struct ContentView: View {
 
 
 //　かっこが閉じているか判定するメソッド
-//func isValid(_ s: String) -> Bool {‬
-//    
-//    
-//    
-//    return true
-//    ‭ }‬
+func isValid(_ s: String) -> Bool {
+    
+    // 開き括弧を一時的に保存するためのスタック
+    var stack: [Character] = []
+    // 対応する開き括弧を示すマップ（閉じ括弧 -> 開き括弧）
+    let pairs: [Character: Character] = [")": "(", "]": "[", "}": "{"]
+    
+    //    文字列を一文字ずつ判定
+    for char in s {
+        //        開き括弧ならスタックに追加
+        if char == "(" || char == "[" || char == "{" {
+            stack.append(char)
+        }
+        //        閉じ括弧の場合
+        else if let expected = pairs[char] {
+            // スタックが空、または対応していなかった場合
+            if stack.isEmpty || stack.popLast() != expected {
+                return false
+            }
+            
+        }
+        
+    }
+    return stack.isEmpty
+    
+}
 
 
 
