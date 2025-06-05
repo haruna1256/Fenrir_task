@@ -10,14 +10,19 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+//            入力画面と表示画面を作る
         }
         .padding()
     }
 }
+
+
+//　かっこが閉じているか判定するメソッド
+//func isValid(_s: String) -> Bool {‬
+//
+//‭ }‬
+
+
 
 #Preview {
     ContentView()
