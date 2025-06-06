@@ -73,16 +73,16 @@ func isValid(_ s: String) -> Bool {
                 return false
             }
             
+     
         }
         
     }
-    return true
-    
+    // 最後にスタックが空かどうかをチェック
+        return stack.isEmpty
 }
 
 
-
-
+// 画面に描画する
 #Preview {
     ContentView()
 }
