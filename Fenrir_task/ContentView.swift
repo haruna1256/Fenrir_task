@@ -73,12 +73,12 @@ func isValid(_ s: String) -> Bool {
                 return false
             }
             
-     
+            
         }
         
     }
     // 最後にスタックが空かどうかをチェック
-        return stack.isEmpty
+    return stack.isEmpty
 }
 
 
