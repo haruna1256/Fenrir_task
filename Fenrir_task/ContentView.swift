@@ -11,7 +11,9 @@ struct ContentView: View {
     //    入力されたものを受け取る変数
     @State private var inputText: String = ""
     //    判定結果の変数
-    @State private var result: Bool? = nil
+    @State private var result: Bool = true
+    //    正しいかどうか表示する変数
+    @State private var resultText: String = " "
     var body: some View {
         VStack {
             Text("括弧閉じてるか判定")
@@ -25,20 +27,23 @@ struct ContentView: View {
             Button("判定する") {
                 //                判定するメソッドに飛ばす
                 result = isValid(inputText)
+                //            正しいかどうかの表示
+                if result == true{
+                    resultText = "正しい"
+                }else if result == false {
+                    resultText = "正しくない"
+                }
+                print("結果：\(resultText)")
             }
             .padding()
             .background(Color.red)
             .foregroundStyle(Color.white)
             .cornerRadius(10)
             
-            //            正しいかどうかの表示
-            if let resultText = result {
-                Text(resultText ? "正しい" : "正しくない")
-                    .font(.headline)
-                ‭/*print("出して")*/
-//                なんでー
-                
-            }
+            
+            Text("結果：\(resultText)" )
+                .font(.headline)
+            
             Spacer()
             
         }
@@ -71,9 +76,10 @@ func isValid(_ s: String) -> Bool {
         }
         
     }
-    return stack.isEmpty
+    return true
     
 }
+
 
 
 
