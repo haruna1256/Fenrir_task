@@ -54,7 +54,9 @@ struct ContentView: View {
 
 //　かっこが閉じているか判定するメソッド
 func isValid(_ s: String) -> Bool {
-    
+//    閉じ括弧の中の数数えてみる種類は考えずに
+    var innumber = 0
+    var outnumber = 0
     // 開き括弧を一時的に保存するためのスタック
     var stack: [Character] = []
     // 対応する開き括弧を示すマップ（閉じ括弧 -> 開き括弧）
@@ -65,6 +67,7 @@ func isValid(_ s: String) -> Bool {
         //        開き括弧ならスタックに追加
         if char == "(" || char == "[" || char == "{" {
             stack.append(char)
+            innumber += 1
         }
         //        閉じ括弧の場合
         else if let expected = pairs[char] {
@@ -72,11 +75,13 @@ func isValid(_ s: String) -> Bool {
             if stack.isEmpty || stack.popLast() != expected {
                 return false
             }
+            outnumber += 1
             
             
         }
         
     }
+    print(innumber, outnumber)
     // 最後にスタックが空かどうかをチェック
     return stack.isEmpty
 }
